@@ -1,0 +1,2 @@
+# litchi
+a easy blog
