@@ -48,6 +48,26 @@ func setupRouter() *gin.Engine {
 		}
 	})
 
+	// got some json
+	// gin.H 是 map[string]interface{} 的一种快捷方式
+	r.GET("/someJSON", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "hey", "status": http.StatusOK})
+	})
+	r.GET("/moreJSON", func(c *gin.Context) {
+		// 你也可以使用一个结构体
+		var msg struct {
+			Name    string `json:"user"`
+			Message string
+			Number  int
+		}
+		msg.Name = "Lena"
+		msg.Message = "hey"
+		msg.Number = 123
+		// 注意 msg.Name 在 JSON 中变成了 "user"
+		// 将输出：{"user": "Lena", "Message": "hey", "Number": 123}
+		c.JSON(http.StatusOK, msg)
+	})
+
 	// Authorized group (uses gin.BasicAuth() middleware)
 	// Same than:
 	// authorized := r.Group("/")
