@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -51,7 +52,7 @@ func setupRouter() *gin.Engine {
 	// got some json
 	// gin.H 是 map[string]interface{} 的一种快捷方式
 	r.GET("/someJSON", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "hey", "status": http.StatusOK})
+		c.JSON(http.StatusOK, gin.H{"message": "hey", "status": http.StatusOK, "date": time.Now()})
 	})
 	r.GET("/moreJSON", func(c *gin.Context) {
 		// 你也可以使用一个结构体
